@@ -9,6 +9,7 @@ import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
 import io.ktor.request.receive
 import io.ktor.response.respond
+import io.ktor.routing.get
 import io.ktor.routing.post
 import io.ktor.routing.route
 import io.ktor.routing.routing
@@ -44,6 +45,16 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
             post {
                 val person: Person = call.receive()
                 call.respond(bostedsvilkaar.evaluer(person))
+            }
+        }
+        route( "/isAlive"){
+            get{
+               call.respond("Ok")
+            }
+        }
+        route("/isReady"){
+            get{
+                call.respond("Ok")
             }
         }
     }

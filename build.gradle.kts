@@ -1,11 +1,16 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 val nareVersion = "13785ff"
 val ktorVersion = "1.2.6"
 val logbackVersion = "1.2.3"
 val logstashVersion = "5.1"
 
+val mainClass = "no.nav.medlemskap.ApplicationKt"
+
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.3.41"
-    application
+    id("org.jetbrains.kotlin.jvm") version "1.3.61"
+    id("com.github.johnrengelman.shadow") version "5.1.0"
 }
 
 repositories {
@@ -25,6 +30,27 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
 
-application {
-    mainClassName = "no.nav.medlemskap.AppKt"
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.withType<Wrapper> {
+    gradleVersion = "5.6.3"
+}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("app")
+    archiveClassifier.set("")
+    manifest {
+        attributes(
+                mapOf(
+                        "Main-Class" to mainClass
+                )
+        )
+    }
 }
