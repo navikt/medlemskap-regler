@@ -1,0 +1,17 @@
+{
+  "statsborgerskap": [
+    {
+      "landkode": "AS"
+    }
+  ],
+  "personstatuser": [],
+  "bostedsadresser": [
+    {
+      "adresselinje": "Amerikansk Samoa",
+      "landkode": "AS",
+      "fom": "01-12-2010"
+    }
+  ],
+  "postadresser": [],
+  "midlertidigAdresser": []
+}
