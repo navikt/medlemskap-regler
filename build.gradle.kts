@@ -5,8 +5,12 @@ val nareVersion = "13785ff"
 val ktorVersion = "1.2.6"
 val logbackVersion = "1.2.3"
 val logstashVersion = "5.1"
+val medlemskapDomeneVersion = "9"
 
 val mainClass = "no.nav.medlemskap.ApplicationKt"
+
+val githubUser: String by project
+val githubPassword: String by project
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.61"
@@ -16,6 +20,13 @@ plugins {
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url = uri("https://maven.pkg.github.com/navikt/medlemskap-domene")
+        credentials {
+            username = githubUser
+            password = githubPassword
+        }
+    }
 }
 
 dependencies {
@@ -25,6 +36,7 @@ dependencies {
     implementation("io.ktor:ktor-gson:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
+    implementation("no.nav.medlemskap:medlemskap-domene:$medlemskapDomeneVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
