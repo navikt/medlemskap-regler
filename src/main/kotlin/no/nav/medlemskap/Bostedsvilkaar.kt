@@ -24,7 +24,7 @@ private fun harGyldigAdresseSiste12Mndr(adresser: List<Adresse>): Evaluering =
         }
 
 private fun Adresse.erNorsk() =
-        this.landkode == "NO"
+        this.landkode == "NO" || this.landkode == "NOR"
 
 private fun LocalDate?.elderEnn12Mndr() =
         this?.isBefore(LocalDate.now().minusMonths(12)) ?: true
