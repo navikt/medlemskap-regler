@@ -1,10 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
+
 val nareVersion = "13785ff"
 val ktorVersion = "1.2.6"
 val logbackVersion = "1.2.3"
 val logstashVersion = "5.1"
+val kotlinLoggerVersion = "1.7.6"
 val medlemskapDomeneVersion = "11"
 
 
@@ -38,6 +40,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("no.nav.medlemskap:medlemskap-domene:$medlemskapDomeneVersion")
+    implementation("io.github.microutils:kotlin-logging:$kotlinLoggerVersion")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
