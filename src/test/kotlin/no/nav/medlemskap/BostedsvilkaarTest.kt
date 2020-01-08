@@ -2,6 +2,7 @@ package no.nav.medlemskap
 
 import com.google.gson.GsonBuilder
 import no.nav.medlemskap.domene.Personhistorikk
+import no.nav.medlemskap.domene.Regelavklaring
 import no.nav.nare.core.evaluations.Resultat
 import org.junit.Test
 import java.time.LocalDate
@@ -27,7 +28,7 @@ class BostedsvilkaarTest {
         assertEquals(Resultat.NEI, evaluering.resultat)
     }
 
-    private fun String.asDatagrunnlag(): Personhistorikk =
+    private fun String.asDatagrunnlag(): Regelavklaring =
             gson.fromJson(BostedsvilkaarTest::class.java.getResource("/testpersoner/${this}").readText(),
-                    Personhistorikk::class.java)
+                    Regelavklaring::class.java)
 }

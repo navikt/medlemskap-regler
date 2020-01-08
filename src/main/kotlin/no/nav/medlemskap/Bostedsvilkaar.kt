@@ -2,16 +2,17 @@ package no.nav.medlemskap
 
 import no.nav.medlemskap.domene.Adresse
 import no.nav.medlemskap.domene.Personhistorikk
+import no.nav.medlemskap.domene.Regelavklaring
 import no.nav.nare.core.evaluations.Evaluering
 import no.nav.nare.core.evaluations.Evaluering.Companion.ja
 import no.nav.nare.core.evaluations.Evaluering.Companion.nei
 import no.nav.nare.core.specifications.Spesifikasjon
 import java.time.LocalDate
 
-internal val personErBosattINorge = Spesifikasjon<Personhistorikk>(
+internal val personErBosattINorge = Spesifikasjon<Regelavklaring>(
         identitet = "§ 2.1",
         beskrivelse = "Personer som er bosatt i Norge, er pliktige medlemmer i folketrygden.",
-        implementasjon = { harGyldigAdresseSiste12Mndr(it.bostedsadresser) }
+        implementasjon = { harGyldigAdresseSiste12Mndr(it.personhistorikk.bostedsadresser) }
 )
 
 val bostedsvilkaar = personErBosattINorge

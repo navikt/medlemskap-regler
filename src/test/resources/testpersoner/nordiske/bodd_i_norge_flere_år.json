@@ -7,14 +7,19 @@
   "personhistorikk": {
     "statsborgerskap": [
       {
-        "landkode": "NO"
+        "landkode": "SVE"
       }
     ],
     "personstatuser": [],
     "bostedsadresser": [
       {
+        "adresselinje": "Stureplan, Stockholm",
+        "landkode": "SVE",
+        "fom": "01-12-2010"
+      },
+      {
         "adresselinje": "Storgata 1, 0001 Oslo",
-        "landkode": "NO",
+        "landkode": "NOR",
         "fom": "01-12-2010"
       }
     ],

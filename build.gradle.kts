@@ -5,7 +5,8 @@ val nareVersion = "13785ff"
 val ktorVersion = "1.2.6"
 val logbackVersion = "1.2.3"
 val logstashVersion = "5.1"
-val medlemskapDomeneVersion = "9"
+val medlemskapDomeneVersion = "11"
+
 
 val mainClass = "no.nav.medlemskap.ApplicationKt"
 
