@@ -5,8 +5,12 @@ import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializer
 import io.ktor.application.call
 import io.ktor.application.install
+import io.ktor.features.AutoHeadResponse
+import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
 import io.ktor.gson.gson
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
@@ -16,7 +20,6 @@ import io.ktor.routing.routing
 import io.ktor.server.engine.ApplicationEngine
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import no.nav.medlemskap.domene.Personhistorikk
 import no.nav.medlemskap.domene.Regelavklaring
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -41,6 +44,17 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
 
         }
     }
+
+    install(AutoHeadResponse)
+
+    install(CORS) {
+        method(HttpMethod.Post)
+        method(HttpMethod.Options)
+        header(HttpHeaders.ContentType)
+        host(host = "localhost:3000", schemes = listOf("http", "https"))
+        allowSameOrigin = true
+    }
+
 
     routing {
         route("/") {
