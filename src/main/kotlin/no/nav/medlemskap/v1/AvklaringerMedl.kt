@@ -13,6 +13,6 @@ object AvklaringerMedl {
 
 
     private fun personHarDataIMedl(ra: Regelavklaring): Resultat {
-        return Resultat(Resultattype.NEI, "Person har ikke manuelt vedtak")
+        return Resultat(Resultattype.JA, "Person har manuelt vedtak")
     }
 }

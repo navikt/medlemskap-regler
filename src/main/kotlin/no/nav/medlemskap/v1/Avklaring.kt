@@ -11,9 +11,16 @@ class Avklaring (
     var regelVedJa: Avklaring? = null
     var regelVedNei: Avklaring? = null
     var regelVedUavklart: Avklaring? = null
+    var ellerRegel: Avklaring? = null
 
     fun evaluer(ra: Regelavklaring): Resultat {
-        val resultat = operasjon.invoke(ra)
+        val resultat = if (ellerRegel != null) {
+            val resultat1 = operasjon.invoke(ra)
+            val resultat2 = ellerRegel!!.operasjon.invoke(ra)
+            resultat1.eller(resultat2)
+        } else {
+            operasjon.invoke(ra)
+        }
 
         return if (resultat.resultat == Resultattype.JA && regelVedJa != null) {
             val underresultat = regelVedJa!!.evaluer(ra)
@@ -27,6 +34,11 @@ class Avklaring (
         } else {
             resultat
         }
+    }
+
+    fun eller(tilleggsregel: Avklaring): Avklaring {
+        ellerRegel = tilleggsregel
+        return this
     }
 
     fun hvisJa(neste: Avklaring): Avklaring {

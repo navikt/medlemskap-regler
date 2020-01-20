@@ -14,7 +14,7 @@ import java.time.LocalDate
 fun avklarMedlemskap(ra: Regelavklaring): Resultat {
 
     val hovedregel =
-            avklarOmPersonHarTidligereVedtak
+            avklarOmPersonHarTidligereVedtak.eller(avklarOmPersonErMedlemIhhtKapittel2)
                     .hvisNei(avklarOmPersonErOmfattetAvEosavtalen
                             .hvisJa(avklarOmLovvalgErNorsk
                                     .hvisJa(avklarOmPersonErMedlemIhhtKapittel2))
