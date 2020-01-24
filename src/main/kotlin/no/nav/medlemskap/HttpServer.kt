@@ -21,7 +21,6 @@ import io.ktor.server.engine.ApplicationEngine
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import no.nav.medlemskap.domene.Datagrunnlag
-import no.nav.medlemskap.regler.common.Regelkjøring
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -62,6 +61,17 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
             post {
                 val regelavklaring: Datagrunnlag = call.receive()
                 call.respond(Regelkjøring(regelavklaring).regelkjøring())
+            }
+        }
+        route("/v1") {
+            post {
+                val regelavklaring: Datagrunnlag = call.receive()
+                call.respond(Regelkjøring(regelavklaring).regelkjøring())
+            }
+        }
+        route("/versions") {
+            get {
+                call.respond(hentVersjoner())
             }
         }
         route( "/isAlive"){

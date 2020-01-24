@@ -1,8 +1,9 @@
-package no.nav.medlemskap.regler.common
+package no.nav.medlemskap
 
 import com.google.gson.GsonBuilder
 import no.nav.medlemskap.domene.*
 import no.nav.medlemskap.regler.common.Fakta.Companion.initialiserFakta
+import no.nav.medlemskap.regler.common.Resultat
 import no.nav.medlemskap.regler.v1.RegelsettForMedlemskap
 import java.time.LocalDate
 
@@ -14,7 +15,7 @@ class Regelkjøring(datagrunnlag: Datagrunnlag) {
 
 }
 
-fun main() {
+fun test() {
     val datagrunnlag = Datagrunnlag(
             soknadsperiode = Periode(LocalDate.now(), LocalDate.now()),
             soknadstidspunkt = LocalDate.now(),
