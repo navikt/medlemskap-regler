@@ -95,50 +95,51 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
     )
 
     private fun sjekkArbeidsgiver(fakta: Fakta): Resultat =
-            hvis(fakta.sisteArbeidsgiversLand() == "NOR")
-                    .så {
-                        ja("Arbeidsgiver er norsk")
-                    }
-                    .ellers {
-                        nei("Arbeidsgiver er ikke norsk. Land: ${fakta.sisteArbeidsgiversLand()}")
-                    }
+            hvis {
+                fakta.sisteArbeidsgiversLand() == "NOR"
+            } så {
+                ja("Arbeidsgiver er norsk")
+            } ellers {
+                nei("Arbeidsgiver er ikke norsk. Land: ${fakta.sisteArbeidsgiversLand()}")
+            }
 
 
     private fun sjekkMaritim(fakta: Fakta): Resultat =
-            hvis(fakta.sisteArbeidsforholdtype() == Arbeidsforholdstype.MARITIM)
-                    .så {
-                        ja("Personen er ansatt i det maritime")
-                    }
-                    .ellers {
-                        nei("Personen jobber ikke i det maritime")
-                    }
+            hvis {
+                fakta.sisteArbeidsforholdtype() == Arbeidsforholdstype.MARITIM
+            } så {
+                ja("Personen er ansatt i det maritime")
+            } ellers {
+                nei("Personen jobber ikke i det maritime")
+            }
 
 
     private fun sjekkYrkeskodeLuftfart(fakta: Fakta): Resultat =
-            hvis(yrkeskoderLuftfart inneholder fakta.sisteArbeidsforholdYrkeskode())
-                    .så {
-                        ja("Personen er pilot eller kabinansatt")
-                    }
-                    .ellers {
-                        nei("Personen er ikke pilot eller kabinansatt")
-                    }
+            hvis {
+                yrkeskoderLuftfart inneholder fakta.sisteArbeidsforholdYrkeskode()
+            } så {
+                ja("Personen er pilot eller kabinansatt")
+            } ellers {
+                nei("Personen er ikke pilot eller kabinansatt")
+            }
 
     private fun sjekkSkipsregister(fakta: Fakta): Resultat =
-            hvis(norskeSkipsregister inneholder fakta.sisteArbeidsforholdSkipsregister())
-                    .så {
-                        ja("Personen jobber på et norskregistrert skip")
-                    }
-                    .ellers {
-                        nei("Personen jobber ikke på et norskregistrert skip")
-                    }
+            hvis {
+                norskeSkipsregister inneholder fakta.sisteArbeidsforholdSkipsregister()
+            } så {
+                ja("Personen jobber på et norskregistrert skip")
+            } ellers {
+                nei("Personen jobber ikke på et norskregistrert skip")
+            }
 
     private fun sjekkOmBrukerHarJobbetUtenforNorge(fakta: Fakta): Resultat =
-            hvis(fakta.hentBrukerinputArbeidUtenforNorge())
-                    .så {
-                        ja("Bruker har oppgitt å ha jobbet utenfor Norge")
-                    }
-                    .ellers {
-                        nei("Bruker har ikke jobbet utenfor Norge")
-                    }
+            hvis {
+                fakta.hentBrukerinputArbeidUtenforNorge()
+            } så {
+                ja("Bruker har oppgitt å ha jobbet utenfor Norge")
+            } ellers {
+                nei("Bruker har ikke jobbet utenfor Norge")
+            }
+
 
 }

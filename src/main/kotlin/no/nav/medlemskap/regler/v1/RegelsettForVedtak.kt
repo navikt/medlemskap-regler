@@ -6,6 +6,7 @@ import no.nav.medlemskap.domene.Status
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
+import no.nav.medlemskap.regler.common.Verdier.antall
 import no.nav.medlemskap.regler.common.Verdier.inneholder
 import no.nav.medlemskap.regler.common.Verdier.ja
 import no.nav.medlemskap.regler.common.Verdier.nei
@@ -63,32 +64,32 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
     )
 
     private fun sjekkPerioderIMedl(fakta: Fakta): Resultat =
-            hvis (Verdier.antall(fakta.personensPerioderIMedl()) == 0)
-                    .så {
-                        nei("Personen har ingen vedtak i MEDL")
-                    }
-                    .ellers {
-                        ja("Personen har vedtak i MEDL")
-                    }
+            hvis {
+                antall(fakta.personensPerioderIMedl()) == 0
+            } så {
+                nei("Personen har ingen vedtak i MEDL")
+            } ellers {
+                ja("Personen har vedtak i MEDL")
+            }
 
     private fun tellDokumenter(fakta: Fakta): Resultat =
-            hvis (antallDokumenter(fakta.personensDokumenterIJoark()) > 0)
-                    .så {
-                        ja("Personen har dokumenter knyttet til medlemskapsaker.")
-                    }
-                    .ellers {
-                        nei("Personen har ingen dokumenter knyttet til medlemskapsaker.")
-                    }
+            hvis {
+                antallDokumenter(fakta.personensDokumenterIJoark()) > 0
+            } så {
+                ja("Personen har dokumenter knyttet til medlemskapsaker.")
+            } ellers {
+                nei("Personen har ingen dokumenter knyttet til medlemskapsaker.")
+            }
 
 
     private fun tellÅpneOppgaver(fakta: Fakta): Resultat =
-            hvis (antallÅpneOppgaver(fakta.personensOppgaverIGsak()) > 0)
-                    .så {
-                        ja("Personen har åpne oppgaver i GOSYS.")
-                    }
-                    .ellers {
-                        nei("Personen har ingen åpne oppgaver i GOSYS.")
-                    }
+            hvis {
+                antallÅpneOppgaver(fakta.personensOppgaverIGsak()) > 0
+            } så {
+                ja("Personen har åpne oppgaver i GOSYS.")
+            } ellers {
+                nei("Personen har ingen åpne oppgaver i GOSYS.")
+            }
 
 
     private fun antallDokumenter(liste: List<Journalpost>) =

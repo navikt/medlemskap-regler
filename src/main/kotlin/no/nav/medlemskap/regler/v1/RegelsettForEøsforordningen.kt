@@ -25,7 +25,7 @@ class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
 
     private val eøsland = listOf("NOR", "SVE", "DEN", "FIN", "ISL", "GER", "FRA") // TODO Osv...
 
-    val erPersonOmfattetAvEøsforordningen = Avklaring (
+    private val erPersonOmfattetAvEøsforordningen = Avklaring (
             identifikator = "4",
             avklaring = "Er personen omfattet av EØS-forordningen?",
             beskrivelse = "",
@@ -33,13 +33,11 @@ class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
     )
 
     private fun sjekkStatsborgerskap(fakta: Fakta): Resultat =
-            hvis (eøsland inneholder fakta.personensSisteStatsborgerskap())
-                    .så {
-                        ja("Personen er statsborger i et EØS-land.")
-                    }
-                    .ellers {
-                        nei("Personen er ikke statsborger i et EØS-land.")
-                    }
-
-
+            hvis {
+                eøsland inneholder fakta.personensSisteStatsborgerskap()
+            } så {
+                ja("Personen er statsborger i et EØS-land.")
+            } ellers {
+                nei("Personen er ikke statsborger i et EØS-land.")
+            }
 }
