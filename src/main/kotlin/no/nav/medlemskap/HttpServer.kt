@@ -20,7 +20,8 @@ import io.ktor.routing.routing
 import io.ktor.server.engine.ApplicationEngine
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import no.nav.medlemskap.domene.Regelavklaring
+import no.nav.medlemskap.domene.Datagrunnlag
+import no.nav.medlemskap.regler.common.Regelkjøring
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -59,8 +60,8 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
     routing {
         route("/") {
             post {
-                val regelavklaring: Regelavklaring = call.receive()
-                call.respond(bostedsvilkaar.evaluer(regelavklaring))
+                val regelavklaring: Datagrunnlag = call.receive()
+                call.respond(Regelkjøring(regelavklaring).regelkjøring())
             }
         }
         route( "/isAlive"){
