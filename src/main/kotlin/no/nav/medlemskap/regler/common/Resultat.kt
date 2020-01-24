@@ -10,25 +10,30 @@ data class Resultat (
         fun avklar(metode: () -> Resultat): Resultat = metode.invoke()
     }
 
-    fun hvisJa(metode: () -> Resultat): Resultat {
+    infix fun hvisJa(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.JA) {
-            underresultat.add(metode.invoke())
+            kallMetode(metode)
         }
         return this
     }
 
-    fun hvisNei(metode: () -> Resultat): Resultat {
+    infix fun hvisNei(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.NEI) {
-            underresultat.add(metode.invoke())
+            kallMetode(metode)
         }
         return this
     }
 
-    fun hvisUavklart(metode: () -> Resultat): Resultat {
+    infix fun hvisUavklart(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.UAVKLART) {
-            underresultat.add(metode.invoke())
+            kallMetode(metode)
         }
         return this
+    }
+
+    private fun kallMetode(metode: () -> Resultat?) {
+        val resultat = metode.invoke()
+        resultat?.let { underresultat.add(it) }
     }
 
 }

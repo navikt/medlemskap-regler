@@ -8,9 +8,9 @@ abstract class Regelsett(val fakta: Fakta) {
 
     abstract fun evaluer(): Resultat
 
-    protected fun konkluderMed(resultat: Resultat): Resultat {
+    protected fun konkluderMed(resultat: Resultat): Resultat? {
         konklusjon = resultat
-        return resultat
+        return null
     }
 
     protected fun hentUtKonklusjon(underresultat: Resultat): Resultat {

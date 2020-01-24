@@ -14,31 +14,43 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
 
     override fun evaluer(): Resultat {
         val resultat =
-                avklar { erArbeidsgiverNorsk evaluerMed fakta }
-                        .hvisJa {
-                            (erArbeidsforholdetMaritimt evaluerMed fakta)
-                                    .hvisJa {
-                                        (jobberPersonenPåEtNorskregistrertSkip evaluerMed fakta)
-                                                .hvisJa {
-                                                    (harBrukerJobbetUtenforNorge evaluerMed fakta)
-                                                            .hvisNei { konkluderMed(ja("Bruker er medlem")) }
-                                                            .hvisJa { konkluderMed(uavklart("Bruker har jobbet utenfor Norge")) }
-                                                }
-                                                .hvisNei { konkluderMed(uavklart("Bruker jobber ikke på et norskregistrert skip")) }
-                                    }
-                                    .hvisNei {
-                                        (erPersonenPilotEllerKabinansatt evaluerMed fakta)
-                                                .hvisNei {
-                                                    (harBrukerJobbetUtenforNorge evaluerMed fakta)
-                                                            .hvisNei { konkluderMed(ja("Bruker er medlem")) }
-                                                            .hvisJa { konkluderMed(uavklart("Bruker har jobbet utenfor Norge")) }
-                                                }
-                                                .hvisJa { konkluderMed(uavklart("Personen er pilot eller kabinansatt")) }
-                                    }
+                avklar {
+                    erArbeidsgiverNorsk evaluerMed fakta
+                } hvisJa {
+                    avklar {
+                        erArbeidsforholdetMaritimt evaluerMed fakta
+                    } hvisJa {
+                        avklar {
+                            jobberPersonenPåEtNorskregistrertSkip evaluerMed fakta
+                        } hvisJa {
+                            avklar {
+                                harBrukerJobbetUtenforNorge evaluerMed fakta
+                            } hvisNei {
+                                konkluderMed(ja("Bruker er omfattet av norsk lovvalg"))
+                            } hvisJa {
+                                konkluderMed(uavklart("Bruker har jobbet utenfor Norge"))
+                            }
+                        } hvisNei {
+                            konkluderMed(uavklart("Bruker jobber ikke på et norskregistrert skip"))
                         }
-                        .hvisNei {
-                            konkluderMed(uavklart("Kan ikke konkludere på arbeidsgiver"))
+                    } hvisNei {
+                        avklar {
+                            erPersonenPilotEllerKabinansatt evaluerMed fakta
+                        } hvisNei {
+                            avklar {
+                                harBrukerJobbetUtenforNorge evaluerMed fakta
+                            } hvisNei {
+                                konkluderMed(ja("Bruker er medlem"))
+                            } hvisJa {
+                                konkluderMed(uavklart("Bruker har jobbet utenfor Norge"))
+                            }
+                        } hvisJa {
+                            konkluderMed(uavklart("Personen er pilot eller kabinansatt"))
                         }
+                    }
+                } hvisNei {
+                    konkluderMed(uavklart("Kan ikke konkludere på arbeidsgiver"))
+                }
 
         return hentUtKonklusjon(resultat)
     }

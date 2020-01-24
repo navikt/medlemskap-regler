@@ -15,17 +15,25 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
 
     override fun evaluer(): Resultat {
         val resultat =
-                avklar { harAvklarteVedtakIMedl evaluerMed fakta }
-                        .hvisNei {
-                            (finnesDetÅpenOppgaveIGsak evaluerMed fakta)
-                                    .hvisNei {
-                                        (finnesDetDokumenterIJoark evaluerMed fakta)
-                                                .hvisNei { konkluderMed(nei("Personen har ingen vedtak")) }
-                                                .hvisJa { konkluderMed(uavklart("Personen har dokumenter i JOARK")) }
-                                    }
-                                    .hvisJa { konkluderMed(uavklart("Personen har dokumenter i GOSYS")) }
+                avklar {
+                    harAvklarteVedtakIMedl evaluerMed fakta
+                } hvisNei {
+                    avklar {
+                        finnesDetÅpenOppgaveIGsak evaluerMed fakta
+                    } hvisNei {
+                        avklar {
+                            finnesDetDokumenterIJoark evaluerMed fakta
+                        } hvisNei {
+                            konkluderMed(nei("Personen har ingen vedtak"))
+                        } hvisJa {
+                            konkluderMed(uavklart("Personen har dokumenter i JOARK"))
                         }
-                        .hvisJa { konkluderMed(uavklart("Personen har vedtak i MEDL")) }
+                    } hvisJa {
+                        konkluderMed(uavklart("Personen har dokumenter i GOSYS"))
+                    }
+                } hvisJa {
+                    konkluderMed(uavklart("Personen har vedtak i MEDL"))
+                }
 
         return hentUtKonklusjon(resultat)
     }

@@ -12,9 +12,13 @@ class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
 
     override fun evaluer(): Resultat {
         val resultat =
-                avklar { erPersonOmfattetAvEøsforordningen evaluerMed fakta }
-                        .hvisJa { konkluderMed(ja("Personen er omfattet av EØS-ordningen")) }
-                        .hvisNei { konkluderMed(uavklart("Personen er ikke omfattet av EØS-ordningen")) }
+                avklar {
+                    erPersonOmfattetAvEøsforordningen evaluerMed fakta
+                } hvisJa {
+                    konkluderMed(ja("Personen er omfattet av EØS-ordningen"))
+                } hvisNei {
+                    konkluderMed(uavklart("Personen er ikke omfattet av EØS-ordningen"))
+                }
 
         return hentUtKonklusjon(resultat)
     }

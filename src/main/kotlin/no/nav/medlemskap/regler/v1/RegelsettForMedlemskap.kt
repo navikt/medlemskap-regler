@@ -15,20 +15,31 @@ class RegelsettForMedlemskap(fakta: Fakta) : Regelsett(fakta) {
 
     override fun evaluer(): Resultat {
         val resultat =
-                avklar { vedtak.evaluer() }
-                        .hvisJa { konkluderMed(uavklart("Personen har vedtak")) }
-                        .hvisUavklart { konkluderMed(uavklart("Kan ikke vurdere vedtak")) }
-                        .hvisNei {
-                            (eøsforordningen.evaluer())
-                                    .hvisNei { konkluderMed(uavklart("Personen er ikke omfattet av EØS-ordningen")) }
-                                    .hvisUavklart { konkluderMed(uavklart("Kan ikke vurdere EØS")) }
-                                    .hvisJa {
-                                        (lovvalgNorge.evaluer())
-                                                .hvisNei { konkluderMed(uavklart("Lovvalg er ikke Norge")) }
-                                                .hvisUavklart { konkluderMed(uavklart("Kan ikke vurdere lovvalg")) }
-                                                .hvisJa { konkluderMed(ja("Personen er medlem")) }
-                                    }
+                avklar {
+                    vedtak.evaluer()
+                } hvisJa {
+                    konkluderMed(uavklart("Personen har vedtak"))
+                } hvisUavklart {
+                    konkluderMed(uavklart("Kan ikke vurdere vedtak"))
+                } hvisNei {
+                    avklar {
+                        eøsforordningen.evaluer()
+                    } hvisNei {
+                        konkluderMed(uavklart("Personen er ikke omfattet av EØS-ordningen"))
+                    } hvisUavklart {
+                        konkluderMed(uavklart("Kan ikke vurdere EØS"))
+                    } hvisJa {
+                        avklar {
+                            lovvalgNorge.evaluer()
+                        } hvisNei {
+                            konkluderMed(uavklart("Lovvalg er ikke Norge"))
+                        } hvisUavklart {
+                            konkluderMed(uavklart("Kan ikke vurdere lovvalg"))
+                        } hvisJa {
+                            konkluderMed(ja("Personen er medlem"))
                         }
+                    }
+                }
 
         return hentUtKonklusjon(resultat)
     }
