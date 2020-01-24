@@ -3,6 +3,7 @@ package no.nav.medlemskap.regler.v1
 import no.nav.medlemskap.domene.Arbeidsforholdstype
 import no.nav.medlemskap.domene.Skipsregister
 import no.nav.medlemskap.regler.common.*
+import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Verdier.inneholder
 import no.nav.medlemskap.regler.common.Verdier.ja
@@ -82,7 +83,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
     )
 
     private fun sjekkArbeidsgiver(fakta: Fakta): Resultat =
-            HvisUttrykk.hvis(fakta.sisteArbeidsgiversLand() == "NOR")
+            hvis(fakta.sisteArbeidsgiversLand() == "NOR")
                     .så {
                         ja("Arbeidsgiver er norsk")
                     }
@@ -92,7 +93,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
 
 
     private fun sjekkMaritim(fakta: Fakta): Resultat =
-            HvisUttrykk.hvis(fakta.sisteArbeidsforholdtype() == Arbeidsforholdstype.MARITIM)
+            hvis(fakta.sisteArbeidsforholdtype() == Arbeidsforholdstype.MARITIM)
                     .så {
                         ja("Personen er ansatt i det maritime")
                     }
@@ -102,7 +103,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
 
 
     private fun sjekkYrkeskodeLuftfart(fakta: Fakta): Resultat =
-            HvisUttrykk.hvis(yrkeskoderLuftfart inneholder fakta.sisteArbeidsforholdYrkeskode())
+            hvis(yrkeskoderLuftfart inneholder fakta.sisteArbeidsforholdYrkeskode())
                     .så {
                         ja("Personen er pilot eller kabinansatt")
                     }
@@ -111,7 +112,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
                     }
 
     private fun sjekkSkipsregister(fakta: Fakta): Resultat =
-            HvisUttrykk.hvis(norskeSkipsregister inneholder fakta.sisteArbeidsforholdSkipsregister())
+            hvis(norskeSkipsregister inneholder fakta.sisteArbeidsforholdSkipsregister())
                     .så {
                         ja("Personen jobber på et norskregistrert skip")
                     }
@@ -120,7 +121,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
                     }
 
     private fun sjekkOmBrukerHarJobbetUtenforNorge(fakta: Fakta): Resultat =
-            HvisUttrykk.hvis(fakta.hentBrukerinputArbeidUtenforNorge())
+            hvis(fakta.hentBrukerinputArbeidUtenforNorge())
                     .så {
                         ja("Bruker har oppgitt å ha jobbet utenfor Norge")
                     }

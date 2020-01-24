@@ -1,6 +1,7 @@
 package no.nav.medlemskap.regler.v1
 
 import no.nav.medlemskap.regler.common.*
+import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Verdier.inneholder
 import no.nav.medlemskap.regler.common.Verdier.ja
@@ -27,12 +28,14 @@ class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
             operasjon = { sjekkStatsborgerskap(it) }
     )
 
-    private fun sjekkStatsborgerskap(fakta: Fakta): Resultat {
-        return if (eøsland inneholder fakta.personensSisteStatsborgerskap()) {
-            ja("Personen er statsborger i et EØS-land.")
-        } else {
-            nei("Personen er ikke statsborger i et EØS-land.")
-        }
-    }
+    private fun sjekkStatsborgerskap(fakta: Fakta): Resultat =
+            hvis (eøsland inneholder fakta.personensSisteStatsborgerskap())
+                    .så {
+                        ja("Personen er statsborger i et EØS-land.")
+                    }
+                    .ellers {
+                        nei("Personen er ikke statsborger i et EØS-land.")
+                    }
+
 
 }
