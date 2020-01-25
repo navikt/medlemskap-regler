@@ -26,7 +26,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
                             avklar {
                                 harBrukerJobbetUtenforNorge evaluerMed fakta
                             } hvisNei {
-                                konkluderMed(ja("Bruker er omfattet av norsk lovvalg"))
+                                konkluderMed(ja("Personen er omfattet av norsk lovvalg"))
                             } hvisJa {
                                 konkluderMed(uavklart("Bruker har jobbet utenfor Norge"))
                             }
@@ -40,7 +40,7 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
                             avklar {
                                 harBrukerJobbetUtenforNorge evaluerMed fakta
                             } hvisNei {
-                                konkluderMed(ja("Bruker er medlem"))
+                                konkluderMed(ja("Personen er omfattet av norsk lovvalg"))
                             } hvisJa {
                                 konkluderMed(uavklart("Bruker har jobbet utenfor Norge"))
                             }

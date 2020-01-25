@@ -25,7 +25,7 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
                         avklar {
                             finnesDetDokumenterIJoark evaluerMed fakta
                         } hvisNei {
-                            konkluderMed(nei("Personen har ingen vedtak"))
+                            konkluderMed(nei("Personen har ingen manuelle vedtak"))
                         } hvisJa {
                             konkluderMed(uavklart("Personen har dokumenter i JOARK"))
                         }
