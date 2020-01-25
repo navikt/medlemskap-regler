@@ -1,6 +1,6 @@
 package no.nav.medlemskap.regler.common
 
-import no.nav.medlemskap.regler.common.Verdier.uavklart
+import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 abstract class Regelsett(val fakta: Fakta) {
 

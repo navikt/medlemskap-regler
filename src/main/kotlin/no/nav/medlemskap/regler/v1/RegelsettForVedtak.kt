@@ -6,11 +6,11 @@ import no.nav.medlemskap.domene.Status
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
-import no.nav.medlemskap.regler.common.Verdier.antall
-import no.nav.medlemskap.regler.common.Verdier.inneholder
-import no.nav.medlemskap.regler.common.Verdier.ja
-import no.nav.medlemskap.regler.common.Verdier.nei
-import no.nav.medlemskap.regler.common.Verdier.uavklart
+import no.nav.medlemskap.regler.common.Funksjoner.antall
+import no.nav.medlemskap.regler.common.Funksjoner.inneholder
+import no.nav.medlemskap.regler.common.Funksjoner.ja
+import no.nav.medlemskap.regler.common.Funksjoner.nei
+import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
 

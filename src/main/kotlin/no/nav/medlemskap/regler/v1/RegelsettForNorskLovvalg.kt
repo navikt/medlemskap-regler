@@ -5,10 +5,10 @@ import no.nav.medlemskap.domene.Skipsregister
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
-import no.nav.medlemskap.regler.common.Verdier.inneholder
-import no.nav.medlemskap.regler.common.Verdier.ja
-import no.nav.medlemskap.regler.common.Verdier.nei
-import no.nav.medlemskap.regler.common.Verdier.uavklart
+import no.nav.medlemskap.regler.common.Funksjoner.inneholder
+import no.nav.medlemskap.regler.common.Funksjoner.ja
+import no.nav.medlemskap.regler.common.Funksjoner.nei
+import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
 

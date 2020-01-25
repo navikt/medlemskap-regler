@@ -2,7 +2,7 @@ package no.nav.medlemskap.regler.common
 
 import no.nav.medlemskap.domene.*
 
-class Fakta(val datagrunnlag: Datagrunnlag) {
+class Fakta(private val datagrunnlag: Datagrunnlag) {
 
     companion object {
         fun initialiserFakta(datagrunnlag: Datagrunnlag) = Fakta(datagrunnlag)

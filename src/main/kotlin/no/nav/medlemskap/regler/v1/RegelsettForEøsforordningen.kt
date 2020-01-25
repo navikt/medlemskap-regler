@@ -3,9 +3,9 @@ package no.nav.medlemskap.regler.v1
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
-import no.nav.medlemskap.regler.common.Verdier.inneholder
-import no.nav.medlemskap.regler.common.Verdier.ja
-import no.nav.medlemskap.regler.common.Verdier.nei
+import no.nav.medlemskap.regler.common.Funksjoner.inneholder
+import no.nav.medlemskap.regler.common.Funksjoner.ja
+import no.nav.medlemskap.regler.common.Funksjoner.nei
 
 class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
 

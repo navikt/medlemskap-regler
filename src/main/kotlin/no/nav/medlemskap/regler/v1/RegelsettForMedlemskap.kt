@@ -4,8 +4,8 @@ import no.nav.medlemskap.regler.common.Fakta
 import no.nav.medlemskap.regler.common.Regelsett
 import no.nav.medlemskap.regler.common.Resultat
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
-import no.nav.medlemskap.regler.common.Verdier.ja
-import no.nav.medlemskap.regler.common.Verdier.uavklart
+import no.nav.medlemskap.regler.common.Funksjoner.ja
+import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 class RegelsettForMedlemskap(fakta: Fakta) : Regelsett(fakta) {
 

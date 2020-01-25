@@ -1,6 +1,6 @@
 package no.nav.medlemskap.regler.common
 
-object Verdier {
+object Funksjoner {
 
     fun ja(begrunnelse: String): Resultat = Resultat(Resultattype.JA, begrunnelse)
 
