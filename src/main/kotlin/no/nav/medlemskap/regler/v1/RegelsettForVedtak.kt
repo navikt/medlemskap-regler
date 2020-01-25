@@ -56,7 +56,7 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
             operasjon = { tellDokumenter(it) }
     )
 
-    val finnesDetÅpenOppgaveIGsak = Avklaring (
+    private val finnesDetÅpenOppgaveIGsak = Avklaring (
             identifikator = "2",
             avklaring = "Finnes det åpne oppgaver i GOSYS",
             beskrivelse = "",
