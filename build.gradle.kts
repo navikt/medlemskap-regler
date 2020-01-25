@@ -7,6 +7,7 @@ val logbackVersion = "1.2.3"
 val logstashVersion = "5.1"
 val kotlinLoggerVersion = "1.7.6"
 val medlemskapDomeneVersion = "18"
+val junitJupiterVersion = "5.4.0"
 
 val mainClass = "no.nav.medlemskap.ApplicationKt"
 
@@ -39,8 +40,9 @@ dependencies {
     implementation("no.nav.medlemskap:medlemskap-domene:$medlemskapDomeneVersion")
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggerVersion")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
 }
 
 java {
