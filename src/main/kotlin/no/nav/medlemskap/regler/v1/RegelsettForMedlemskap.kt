@@ -4,8 +4,6 @@ import no.nav.medlemskap.regler.common.Fakta
 import no.nav.medlemskap.regler.common.Regelsett
 import no.nav.medlemskap.regler.common.Resultat
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
-import no.nav.medlemskap.regler.common.Funksjoner.ja
-import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 class RegelsettForMedlemskap(fakta: Fakta) : Regelsett(fakta) {
 
@@ -36,7 +34,7 @@ class RegelsettForMedlemskap(fakta: Fakta) : Regelsett(fakta) {
                         } hvisUavklart {
                             konkluderMed(uavklart("Kan ikke vurdere lovvalg på grunn av mangelfulle data"))
                         } hvisJa {
-                            konkluderMed(ja("Personen er omfattet av norsk lovval, og dermed medlem"))
+                            konkluderMed(ja("Personen er omfattet av norsk lovvalg, og dermed medlem"))
                         }
                     }
                 }

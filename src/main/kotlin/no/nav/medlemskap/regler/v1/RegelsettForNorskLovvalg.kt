@@ -6,9 +6,6 @@ import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
-import no.nav.medlemskap.regler.common.Funksjoner.ja
-import no.nav.medlemskap.regler.common.Funksjoner.nei
-import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
 

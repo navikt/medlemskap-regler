@@ -8,9 +8,6 @@ import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Funksjoner.antall
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
-import no.nav.medlemskap.regler.common.Funksjoner.ja
-import no.nav.medlemskap.regler.common.Funksjoner.nei
-import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
 class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
 

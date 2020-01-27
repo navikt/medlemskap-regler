@@ -6,5 +6,8 @@ data class Avklaring(
         val beskrivelse: String,
         val operasjon: (f: Fakta) -> Resultat
 ) {
-    infix fun evaluerMed(fakta: Fakta): Resultat = operasjon.invoke(fakta)
+    infix fun evaluerMed(fakta: Fakta): Resultat {
+        val resultat = operasjon.invoke(fakta)
+        return resultat.copy(identifikator = identifikator, avklaring = avklaring)
+    }
 }
