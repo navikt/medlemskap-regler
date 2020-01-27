@@ -1,13 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-
 val ktorVersion = "1.2.6"
 val logbackVersion = "1.2.3"
 val logstashVersion = "5.1"
 val kotlinLoggerVersion = "1.7.6"
 val medlemskapDomeneVersion = "18"
 val junitJupiterVersion = "5.4.0"
+val prometheusVersion = "0.7.0"
+val assertkVersion = "0.21"
 
 val mainClass = "no.nav.medlemskap.ApplicationKt"
 
@@ -39,10 +40,13 @@ dependencies {
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("no.nav.medlemskap:medlemskap-domene:$medlemskapDomeneVersion")
     implementation("io.github.microutils:kotlin-logging:$kotlinLoggerVersion")
+    implementation("io.prometheus:simpleclient_hotspot:$prometheusVersion")
+    implementation("io.prometheus:simpleclient_common:$prometheusVersion")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:$assertkVersion")
 }
 
 java {
@@ -56,6 +60,13 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Wrapper> {
     gradleVersion = "5.6.3"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 tasks.withType<ShadowJar> {

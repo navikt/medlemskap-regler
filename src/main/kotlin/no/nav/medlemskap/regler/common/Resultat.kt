@@ -1,11 +1,10 @@
 package no.nav.medlemskap.regler.common
 
-data class Resultat (
+data class Resultat(
         val resultat: Resultattype,
         val beskrivelse: String,
         val underresultat: MutableList<Resultat> = mutableListOf()
 ) {
-
     companion object {
         fun avklar(metode: () -> Resultat): Resultat = metode.invoke()
     }

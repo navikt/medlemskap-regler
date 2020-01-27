@@ -7,7 +7,7 @@ import no.nav.medlemskap.regler.common.Funksjoner.inneholder
 import no.nav.medlemskap.regler.common.Funksjoner.ja
 import no.nav.medlemskap.regler.common.Funksjoner.nei
 
-class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
+class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett("Regelsett for EØS forordningen", fakta) {
 
     override fun evaluer(): Resultat {
         val resultat =
@@ -24,7 +24,7 @@ class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
 
     private val eøsland = listOf("NOR", "SVE", "DEN", "FIN", "ISL", "GER", "FRA") // TODO Osv...
 
-    private val erPersonenEøsStatsborger = Avklaring (
+    private val erPersonenEøsStatsborger = Avklaring(
             identifikator = "4",
             avklaring = "Er personen statsborger i et EØS land?",
             beskrivelse = "",
