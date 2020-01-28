@@ -4,8 +4,8 @@ import no.nav.medlemskap.regler.common.Fakta
 import no.nav.medlemskap.regler.common.Resultattype
 import no.nav.medlemskap.regler.personer.enkelAmerikansk
 import no.nav.medlemskap.regler.personer.enkelNorsk
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 
 class RegelsettForEøsForordningenTest {
 

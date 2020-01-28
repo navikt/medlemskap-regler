@@ -7,7 +7,7 @@ import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Funksjoner.ja
 import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
-class RegelsettForMedlemskap(fakta: Fakta) : Regelsett(fakta) {
+class RegelsettForMedlemskap(fakta: Fakta) : Regelsett("Regelsett for medlemskap", fakta) {
 
     private val manuelleVedtakFraNav = RegelsettForVedtak(fakta)
     private val eøsforordningen = RegelsettForEøsforordningen(fakta)

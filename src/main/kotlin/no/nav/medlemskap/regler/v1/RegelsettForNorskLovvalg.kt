@@ -10,7 +10,7 @@ import no.nav.medlemskap.regler.common.Funksjoner.ja
 import no.nav.medlemskap.regler.common.Funksjoner.nei
 import no.nav.medlemskap.regler.common.Funksjoner.uavklart
 
-class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
+class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett("Regelsett for norsk lovvalg", fakta) {
 
     override fun evaluer(): Resultat {
         val resultat =
