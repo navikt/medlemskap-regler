@@ -1,38 +1,31 @@
 package no.nav.medlemskap.regler.common
 
 data class Resultat(
+        val identifikator: String = "",
+        val avklaring: String = "",
         val resultat: Resultattype,
         val beskrivelse: String,
-        val underresultat: MutableList<Resultat> = mutableListOf()
+        val delresultat: List<Resultat> = listOf()
 ) {
-    companion object {
-        fun avklar(metode: () -> Resultat): Resultat = metode.invoke()
-    }
-
     infix fun hvisJa(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.JA) {
-            kallMetode(metode)
+            metode.invoke()
         }
         return this
     }
 
     infix fun hvisNei(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.NEI) {
-            kallMetode(metode)
+            metode.invoke()
         }
         return this
     }
 
     infix fun hvisUavklart(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.UAVKLART) {
-            kallMetode(metode)
+            metode.invoke()
         }
         return this
-    }
-
-    private fun kallMetode(metode: () -> Resultat?) {
-        val resultat = metode.invoke()
-        resultat?.let { underresultat.add(it) }
     }
 
 }

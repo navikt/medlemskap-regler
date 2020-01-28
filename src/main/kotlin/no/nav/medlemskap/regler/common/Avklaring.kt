@@ -8,5 +8,8 @@ data class Avklaring(
         val beskrivelse: String,
         val operasjon: (f: Fakta) -> Resultat
 ) {
-    infix fun evaluerMed(fakta: Fakta): Resultat = operasjon.invoke(fakta).apply {  regelCounter.labels(avklaring, this.resultat.name).inc() }
+    infix fun evaluerMed(fakta: Fakta): Resultat {
+        val resultat = operasjon.invoke(fakta).apply {  regelCounter.labels(avklaring, this.resultat.name).inc() }
+        return resultat.copy(identifikator = identifikator, avklaring = avklaring)
+    }
 }
