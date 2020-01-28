@@ -1,6 +1,6 @@
 package no.nav.medlemskap.regler.common
 
-data class Resultat (
+data class Resultat(
         val identifikator: String = "",
         val avklaring: String = "",
         val resultat: Resultattype,

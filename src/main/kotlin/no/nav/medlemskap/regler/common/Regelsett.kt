@@ -1,6 +1,8 @@
 package no.nav.medlemskap.regler.common
 
-abstract class Regelsett(val fakta: Fakta) {
+import no.nav.medlemskap.metrics.regelCounter
+
+abstract class Regelsett(val navn: String, val fakta: Fakta) {
 
     private var konklusjon: Resultat? = null
     private val delresultat: MutableList<Resultat> = mutableListOf()
@@ -26,7 +28,7 @@ abstract class Regelsett(val fakta: Fakta) {
     }
 
     protected fun hentUtKonklusjon(underresultat: Resultat): Resultat {
-        return konklusjon ?: uavklart("Kom ikke til noen konklusjon")
+        return (konklusjon ?: uavklart("Kom ikke til noen konklusjon")).apply { regelCounter.labels(navn, this.resultat.name).inc() }
     }
 
     protected fun ja(begrunnelse: String): Resultat = Resultat (

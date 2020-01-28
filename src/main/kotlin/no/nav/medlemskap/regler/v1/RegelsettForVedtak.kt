@@ -8,7 +8,7 @@ import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Funksjoner.antall
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
 
-class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
+class RegelsettForVedtak(fakta: Fakta) : Regelsett("Regelsett for vedtak", fakta) {
 
     override val KONKLUSJON_IDENTIFIKATOR: String get() = "VED"
     override val KONKLUSJON_AVKLARING: String get() = "Har personen manuelle vadtak fra NAV?"
@@ -41,21 +41,21 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
     private val tillatteTemaer = listOf("MED", "UFM", "TRY")
     private val tillatteStatuser = listOf(Status.AAPNET, Status.OPPRETTET, Status.UNDER_BEHANDLING)
 
-    private val harAvklarteVedtakIMedl = Avklaring (
+    private val harAvklarteVedtakIMedl = Avklaring(
             identifikator = "VED-1",
             avklaring = "Sjekk om det finnes avklarte vedtak i MEDL",
             beskrivelse = "",
             operasjon = { sjekkPerioderIMedl(it) }
     )
 
-    private val finnesDetDokumenterIJoark = Avklaring (
+    private val finnesDetDokumenterIJoark = Avklaring(
             identifikator = "VED-2",
             avklaring = "Finnes det åpne dokumenter i JOARK",
             beskrivelse = "",
             operasjon = { tellDokumenter(it) }
     )
 
-    private val finnesDetÅpenOppgaveIGsak = Avklaring (
+    private val finnesDetÅpenOppgaveIGsak = Avklaring(
             identifikator = "VED-3",
             avklaring = "Finnes det åpne oppgaver i GOSYS",
             beskrivelse = "",
@@ -93,14 +93,11 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
 
     private fun antallDokumenter(liste: List<Journalpost>) =
             liste
-                    .filter { journalpost ->  tillatteTemaer inneholder journalpost.tema }
-                    .size
+                    .count { journalpost -> tillatteTemaer inneholder journalpost.tema }
 
     private fun antallÅpneOppgaver(liste: List<Oppgave>) =
             liste
-                    .filter { oppgave -> tillatteTemaer inneholder oppgave.tema }
-                    .filter { oppgave -> tillatteStatuser inneholder oppgave.status }
-                    .size
+                    .count { oppgave -> tillatteTemaer inneholder oppgave.tema && tillatteStatuser inneholder oppgave.status }
 
 
 }

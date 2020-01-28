@@ -6,7 +6,7 @@ import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
 
-class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
+class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett("Regelsett for norsk lovvalg", fakta) {
 
     override val KONKLUSJON_IDENTIFIKATOR: String get() = "LOV"
     override val KONKLUSJON_AVKLARING: String get() = "Er personen omfattet av norsk lovvalg?"
