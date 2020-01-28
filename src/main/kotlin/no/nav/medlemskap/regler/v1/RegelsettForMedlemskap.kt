@@ -3,13 +3,16 @@ package no.nav.medlemskap.regler.v1
 import no.nav.medlemskap.regler.common.Fakta
 import no.nav.medlemskap.regler.common.Regelsett
 import no.nav.medlemskap.regler.common.Resultat
-import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 
 class RegelsettForMedlemskap(fakta: Fakta) : Regelsett(fakta) {
 
     private val manuelleVedtakFraNav = RegelsettForVedtak(fakta)
     private val eøsforordningen = RegelsettForEøsforordningen(fakta)
     private val lovvalgNorge = RegelsettForNorskLovvalg(fakta)
+
+    override val KONKLUSJON_IDENTIFIKATOR: String get() = "LOVME"
+
+    override val KONKLUSJON_AVKLARING: String get() = "Er personen medlem av folketrygden?"
 
     override fun evaluer(): Resultat {
         val resultat =

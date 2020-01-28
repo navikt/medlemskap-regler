@@ -2,10 +2,12 @@ package no.nav.medlemskap.regler.v1
 
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
-import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
 
 class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
+
+    override val KONKLUSJON_IDENTIFIKATOR: String get() = "EØS"
+    override val KONKLUSJON_AVKLARING: String get() = "Er personen omfattet av EØS-forordningen?"
 
     override fun evaluer(): Resultat {
         val resultat =
@@ -23,7 +25,7 @@ class RegelsettForEøsforordningen(fakta: Fakta) : Regelsett(fakta) {
     private val eøsland = listOf("NOR", "SVE", "DEN", "FIN", "ISL", "GER", "FRA") // TODO Osv...
 
     private val erPersonenEøsStatsborger = Avklaring (
-            identifikator = "4",
+            identifikator = "EØS-1",
             avklaring = "Er personen statsborger i et EØS land?",
             beskrivelse = "",
             operasjon = { sjekkStatsborgerskap(it) }

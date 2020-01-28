@@ -7,11 +7,6 @@ data class Resultat (
         val beskrivelse: String,
         val delresultat: List<Resultat> = listOf()
 ) {
-
-    companion object {
-        fun avklar(metode: () -> Resultat): Resultat = metode.invoke()
-    }
-
     infix fun hvisJa(metode: () -> Resultat?): Resultat {
         if (resultat == Resultattype.JA) {
             metode.invoke()

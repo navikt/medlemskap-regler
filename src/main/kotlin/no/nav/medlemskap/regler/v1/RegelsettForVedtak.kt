@@ -5,11 +5,13 @@ import no.nav.medlemskap.domene.Oppgave
 import no.nav.medlemskap.domene.Status
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
-import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Funksjoner.antall
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
 
 class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
+
+    override val KONKLUSJON_IDENTIFIKATOR: String get() = "VED"
+    override val KONKLUSJON_AVKLARING: String get() = "Har personen manuelle vadtak fra NAV?"
 
     override fun evaluer(): Resultat {
         val resultat =
@@ -40,21 +42,21 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett(fakta) {
     private val tillatteStatuser = listOf(Status.AAPNET, Status.OPPRETTET, Status.UNDER_BEHANDLING)
 
     private val harAvklarteVedtakIMedl = Avklaring (
-            identifikator = "1",
+            identifikator = "VED-1",
             avklaring = "Sjekk om det finnes avklarte vedtak i MEDL",
             beskrivelse = "",
             operasjon = { sjekkPerioderIMedl(it) }
     )
 
     private val finnesDetDokumenterIJoark = Avklaring (
-            identifikator = "3",
+            identifikator = "VED-2",
             avklaring = "Finnes det åpne dokumenter i JOARK",
             beskrivelse = "",
             operasjon = { tellDokumenter(it) }
     )
 
     private val finnesDetÅpenOppgaveIGsak = Avklaring (
-            identifikator = "2",
+            identifikator = "VED-3",
             avklaring = "Finnes det åpne oppgaver i GOSYS",
             beskrivelse = "",
             operasjon = { tellÅpneOppgaver(it) }

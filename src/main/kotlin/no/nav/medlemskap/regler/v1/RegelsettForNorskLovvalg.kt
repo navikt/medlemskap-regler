@@ -4,10 +4,12 @@ import no.nav.medlemskap.domene.Arbeidsforholdstype
 import no.nav.medlemskap.domene.Skipsregister
 import no.nav.medlemskap.regler.common.*
 import no.nav.medlemskap.regler.common.HvisUttrykk.Companion.hvis
-import no.nav.medlemskap.regler.common.Resultat.Companion.avklar
 import no.nav.medlemskap.regler.common.Funksjoner.inneholder
 
 class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
+
+    override val KONKLUSJON_IDENTIFIKATOR: String get() = "LOV"
+    override val KONKLUSJON_AVKLARING: String get() = "Er personen omfattet av norsk lovvalg?"
 
     override fun evaluer(): Resultat {
         val resultat =
@@ -57,35 +59,35 @@ class RegelsettForNorskLovvalg(fakta: Fakta) : Regelsett(fakta) {
     private val norskeSkipsregister = listOf(Skipsregister.nor)
 
     private val erArbeidsgiverNorsk = Avklaring(
-            identifikator = "5",
+            identifikator = "LOV-1",
             avklaring = "Jobber personen for en norsk arbeidsgiver?",
             beskrivelse = "",
             operasjon = { sjekkArbeidsgiver(it) }
     )
 
     private val erArbeidsforholdetMaritimt = Avklaring(
-            identifikator = "6",
+            identifikator = "LOV-2",
             avklaring = "Sjekk om personen jobber i det maritime",
             beskrivelse = "",
             operasjon = { sjekkMaritim(it) }
     )
 
     private val erPersonenPilotEllerKabinansatt = Avklaring(
-            identifikator = "7",
+            identifikator = "LOV-3",
             avklaring = "Sjekk om personen er pilot eller kabinansatt",
             beskrivelse = "",
             operasjon = { sjekkYrkeskodeLuftfart(it) }
     )
 
     private val jobberPersonenPåEtNorskregistrertSkip = Avklaring(
-            identifikator = "8",
+            identifikator = "LOV-4",
             avklaring = "Sjekk om personen jobber på et norskregistrert skip",
             beskrivelse = "",
             operasjon = { sjekkSkipsregister(it) }
     )
 
     private val harBrukerJobbetUtenforNorge = Avklaring(
-            identifikator = "9",
+            identifikator = "LOV-5",
             avklaring = "Sjekk om personen har oppgitt å ha jobbet utenfor Norge",
             beskrivelse = "",
             operasjon = { sjekkOmBrukerHarJobbetUtenforNorge(it) }
