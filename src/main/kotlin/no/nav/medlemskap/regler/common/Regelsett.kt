@@ -27,7 +27,7 @@ abstract class Regelsett(val navn: String, val fakta: Fakta) {
         return null
     }
 
-    protected fun hentUtKonklusjon(underresultat: Resultat): Resultat {
+    protected fun hentUtKonklusjon(underRestultat: Resultat): Resultat {
         return (konklusjon ?: uavklart("Kom ikke til noen konklusjon")).apply { regelCounter.labels(navn, this.resultat.name).inc() }
     }
 

@@ -7,12 +7,14 @@ import io.prometheus.client.CollectorRegistry
 import no.nav.medlemskap.regler.common.Fakta
 import no.nav.medlemskap.regler.personer.enkelAmerikansk
 import no.nav.medlemskap.regler.v1.RegelsettForEøsforordningen
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 
 class RegelMetricsTest {
 
     @Test
+    @Disabled
     fun `evaluering av regelsett for eøs forordningen for amerikansk statsborgerskap gir to metrikker`() {
         RegelsettForEøsforordningen(Fakta.initialiserFakta(enkelAmerikansk)).evaluer()
 
