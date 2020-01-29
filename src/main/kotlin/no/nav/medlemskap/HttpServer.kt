@@ -62,10 +62,9 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
     routing {
         route("/") {
             post {
-                val datagrunnlag: Datagrunnlag = call.receive()
                 call.respond("ok")
-              //  call.respond(datagrunnlag)
-               // call.respond(RegelsettForMedlemskap(initialiserFakta(datagrunnlag)).evaluer())
+          //      val datagrunnlag: Datagrunnlag = call.receive()
+          //      call.respond(RegelsettForMedlemskap(initialiserFakta(datagrunnlag)).evaluer())
             }
         }
         route("/v1") {
