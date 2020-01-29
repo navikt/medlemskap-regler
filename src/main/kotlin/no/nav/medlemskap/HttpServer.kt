@@ -1,16 +1,20 @@
 package no.nav.medlemskap
 
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonPrimitive
-import com.google.gson.JsonSerializer
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.MapperFeature
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.AutoHeadResponse
 import io.ktor.features.CORS
 import io.ktor.features.ContentNegotiation
-import io.ktor.gson.gson
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.jackson.JacksonConverter
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.get
@@ -21,31 +25,21 @@ import io.ktor.server.engine.ApplicationEngine
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import no.nav.medlemskap.domene.Datagrunnlag
-import no.nav.medlemskap.regler.common.Fakta
 import no.nav.medlemskap.regler.common.Fakta.Companion.initialiserFakta
 import no.nav.medlemskap.regler.v1.RegelsettForMedlemskap
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
-private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+val objectMapper: ObjectMapper = ObjectMapper()
+        .registerKotlinModule()
+        .registerModule(JavaTimeModule())
+        .configure(SerializationFeature.INDENT_OUTPUT, true)
+        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        .configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS, true)
 
-val localDateSerializer: JsonSerializer<LocalDate> = JsonSerializer { src, _, _ ->
-    if (src == null) null else JsonPrimitive(src.format(formatter))
-}
-
-val localDateDeserializer: JsonDeserializer<LocalDate> = JsonDeserializer<LocalDate> { json, _, _ ->
-    if (json == null) null else LocalDate.parse(json.asString, formatter)
-}
 
 fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
-    install(ContentNegotiation) {
-        gson {
-            registerTypeAdapter(LocalDate::class.java, localDateDeserializer)
-            registerTypeAdapter(LocalDate::class.java, localDateSerializer)
-            setPrettyPrinting()
-            disableHtmlEscaping()
 
-        }
+    install(ContentNegotiation) {
+        register(ContentType.Application.Json, JacksonConverter(objectMapper))
     }
 
     install(AutoHeadResponse)
@@ -63,7 +57,7 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
         route("/") {
             post {
                 val datagrunnlag: Datagrunnlag = call.receive()
-                 call.respond(RegelsettForMedlemskap(initialiserFakta(datagrunnlag)).evaluer())
+                call.respond(RegelsettForMedlemskap(initialiserFakta(datagrunnlag)).evaluer())
             }
         }
         route("/v1") {
@@ -77,13 +71,13 @@ fun createHttpServer(): ApplicationEngine = embeddedServer(Netty, 7070) {
                 call.respond(hentVersjoner())
             }
         }
-        route( "/isAlive"){
-            get{
-               call.respond("Ok")
+        route("/isAlive") {
+            get {
+                call.respond("Ok")
             }
         }
-        route("/isReady"){
-            get{
+        route("/isReady") {
+            get {
                 call.respond("Ok")
             }
         }
