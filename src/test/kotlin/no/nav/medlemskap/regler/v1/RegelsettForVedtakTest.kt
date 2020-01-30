@@ -1,5 +1,6 @@
 package no.nav.medlemskap.regler.v1
 
+import no.nav.medlemskap.domene.Datagrunnlag
 import no.nav.medlemskap.regler.common.Fakta.Companion.initialiserFakta
 import no.nav.medlemskap.regler.common.Resultattype
 import no.nav.medlemskap.regler.personer.Personleser
@@ -12,38 +13,27 @@ class RegelsettForVedtakTest {
 
     @Test
     fun `person uten medl, gosys eller joark data får nei på manuelle vedtak`() {
-        val regelsett = RegelsettForVedtak(initialiserFakta(personleser.enkelNorsk()))
-
-        val resultat = regelsett.evaluer()
-
-        assertEquals(Resultattype.NEI, resultat.resultat)
+        assertEquals(Resultattype.NEI, evaluer(personleser.enkelNorsk()))
     }
 
     @Test
     fun `person med vedtak i medl får ja på manuelle vedtak`() {
-        val regelsett = RegelsettForVedtak(initialiserFakta(personleser.amerikanskMedl()))
-
-        val resultat = regelsett.evaluer()
-
-        assertEquals(Resultattype.JA, resultat.resultat)
+        assertEquals(Resultattype.JA, evaluer(personleser.amerikanskMedl()))
     }
 
     @Test
     fun `person med oppgave i gosys får ja på manuelle vedtak`() {
-        val regelsett = RegelsettForVedtak(initialiserFakta(personleser.amerikanskGosys()))
-
-        val resultat = regelsett.evaluer()
-
-        assertEquals(Resultattype.JA, resultat.resultat)
+        assertEquals(Resultattype.JA, evaluer(personleser.amerikanskGosys()))
     }
 
     @Test
     fun `person med dokument i joark får ja på manuelle vedtak`() {
-        val regelsett = RegelsettForVedtak(initialiserFakta(personleser.amerikanskJoark()))
+        assertEquals(Resultattype.JA, evaluer(personleser.amerikanskJoark()))
+    }
 
-        val resultat = regelsett.evaluer()
-
-        assertEquals(Resultattype.JA, resultat.resultat)
+    private fun evaluer(datagrunnlag: Datagrunnlag): Resultattype {
+        val regelsett = RegelsettForVedtak(initialiserFakta(datagrunnlag))
+        return regelsett.evaluer().resultat
     }
 
 }

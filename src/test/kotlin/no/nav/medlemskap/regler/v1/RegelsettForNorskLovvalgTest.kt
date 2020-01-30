@@ -7,22 +7,22 @@ import no.nav.medlemskap.regler.personer.Personleser
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
 
-class RegelsettForEøsForordningenTest {
+class RegelsettForNorskLovvalgTest {
 
     private val personleser = Personleser()
 
     @Test
-    fun `person med ett norsk statsborgerskap gir resultat ja`() {
-        assertEquals(Resultattype.JA, evaluer(personleser.enkelNorsk()))
+    fun `person med en norsk arbeidsgiver og kun arbeid i Norge, ikke maritim eller pilot, får ja`() {
+        assertEquals(Resultattype.JA, evaluer(personleser.enkelNorskArbeid()))
     }
 
     @Test
-    fun `person med ett amerikansk statsborgerskap gir resuktat nei`() {
-        assertEquals(Resultattype.NEI, evaluer(personleser.enkelAmerikansk()))
+    fun `person med en norsk arbeidsgiver og kun arbeid i Norge, maritimt på norsk skip, får ja`() {
+        assertEquals(Resultattype.JA, evaluer(personleser.enkelNorskMaritim()))
     }
 
     private fun evaluer(datagrunnlag: Datagrunnlag): Resultattype {
-        val regelsett = RegelsettForEøsforordningen(initialiserFakta(datagrunnlag))
+        val regelsett = RegelsettForNorskLovvalg(initialiserFakta(datagrunnlag))
         return regelsett.evaluer().resultat
     }
 
