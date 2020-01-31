@@ -21,6 +21,16 @@ class RegelsettForNorskLovvalgTest {
         assertEquals(Resultattype.JA, evaluer(personleser.enkelNorskMaritim()))
     }
 
+    @Test
+    fun `person med en norsk arbeidsgiver, pilot, får uavklart`() {
+        assertEquals(Resultattype.UAVKLART, evaluer(personleser.enkelNorskPilot()))
+    }
+
+    @Test
+    fun `person med norsk arbeidsgiver på utenlandsk skip, får uavklart`() {
+        assertEquals(Resultattype.UAVKLART, evaluer(personleser.enkelNorskUtenlandskSkip()))
+    }
+
     private fun evaluer(datagrunnlag: Datagrunnlag): Resultattype {
         val regelsett = RegelsettForNorskLovvalg(initialiserFakta(datagrunnlag))
         return regelsett.evaluer().resultat
