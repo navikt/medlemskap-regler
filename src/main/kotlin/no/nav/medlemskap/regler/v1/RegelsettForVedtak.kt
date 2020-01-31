@@ -26,13 +26,13 @@ class RegelsettForVedtak(fakta: Fakta) : Regelsett("Regelsett for vedtak", fakta
                         } hvisNei {
                             konkluderMed(nei("Personen har ingen manuelle vedtak"))
                         } hvisJa {
-                            konkluderMed(uavklart("Personen har dokumenter i JOARK"))
+                            konkluderMed(ja("Personen har dokumenter i JOARK"))
                         }
                     } hvisJa {
-                        konkluderMed(uavklart("Personen har dokumenter i GOSYS"))
+                        konkluderMed(ja("Personen har dokumenter i GOSYS"))
                     }
                 } hvisJa {
-                    konkluderMed(uavklart("Personen har vedtak i MEDL"))
+                    konkluderMed(ja("Personen har vedtak i MEDL"))
                 }
 
         return hentUtKonklusjon(resultat)
